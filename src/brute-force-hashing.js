@@ -6,11 +6,11 @@ export const COLORS = [ 'red', 'green', 'blue', 'yellow', 'pink', 'orange' ];
 
 const rainbowTable = COLORS
     .map( utf8ToBytes )
-    .map( tap( "utf8tobytes" ) )
+    // .map( tap( "utf8tobytes" ) )
     .map( sha256 )
-    .map( tap( "sha256" ) )
+    // .map( tap( "sha256" ) )
     .map( toHex )
-    .map( tap( "toHex" ) )
+    // .map( tap( "toHex" ) )
 
 
 export function findColor( hash ) {
