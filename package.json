@@ -1,0 +1,18 @@
+{
+  "name": "alchemy-ethereum-bootcamp",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+
+  },
+  "devDependencies": {
+    "ethereum-cryptography": "^2.2.1",
+    "vite": "^5.3.4",
+    "vitest": "^2.0.4"
+  }
+}
