@@ -8,9 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest"
-
   },
   "devDependencies": {
+    "crypto-js": "^4.2.0",
     "ethereum-cryptography": "^2.2.1",
     "vite": "^5.3.4",
     "vitest": "^2.0.4"

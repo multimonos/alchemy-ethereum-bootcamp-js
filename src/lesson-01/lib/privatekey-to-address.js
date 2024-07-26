@@ -2,7 +2,7 @@ import { secp256k1 } from "ethereum-cryptography/secp256k1";
 import { toHex } from "ethereum-cryptography/utils";
 import { keccak256 } from "ethereum-cryptography/keccak";
 
-export const privateKeyToHexAddress = privateKey => {
+export const privatekeyToAddress = privateKey => {
     // need an uncompressed 65 byte public key
     const uncompressedKey = secp256k1.getPublicKey( privateKey, false )
 

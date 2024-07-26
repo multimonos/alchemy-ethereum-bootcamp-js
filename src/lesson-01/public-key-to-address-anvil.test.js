@@ -3,7 +3,7 @@ import { secp256k1 } from "ethereum-cryptography/secp256k1";
 import { toHex } from "ethereum-cryptography/utils";
 import { keccak256 } from "ethereum-cryptography/keccak";
 import { anvil } from "../config/anvil.js";
-import { privateKeyToHexAddress } from "./private-key-to-address.js";
+import { privatekeyToAddress } from "./lib/privatekey-to-address.js";
 
 const debug = false
 const PRIVATE_KEY = "6b911fd37cdf5c81d4c0adb1ab7fa822ed253ab0ad9aa18d77257c88b29b718e";
@@ -75,7 +75,7 @@ describe( `anvil public key -> ethereum address`, () => {
         test.each( [ ...cases ] )(
             `$privateKey -> $account`,
             ( { privateKey, account } ) => {
-                const address = privateKeyToHexAddress( privateKey )
+                const address = privatekeyToAddress( privateKey )
                 assert( address.toLowerCase() === account.toLowerCase() )
             } )
     } )
