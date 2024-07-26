@@ -10,7 +10,7 @@ const colorHashes = COLORS.map( color => ({
 
 // console.log( { colorHashes } )
 
-describe( `brute force hasing`, () => {
+describe( `brute force hashing - lesson 1`, () => {
 
     test( `COLORS has length`, () => {
         assert( COLORS.length > 0 )

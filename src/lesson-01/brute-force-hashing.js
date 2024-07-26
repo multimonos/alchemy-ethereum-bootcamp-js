@@ -1,5 +1,5 @@
 import { toHex, utf8ToBytes } from "ethereum-cryptography/utils";
-import { tap } from "./helper.js";
+import { tap } from "../helper/log.js";
 import { sha256 } from "ethereum-cryptography/sha256";
 
 export const COLORS = [ 'red', 'green', 'blue', 'yellow', 'pink', 'orange' ];
