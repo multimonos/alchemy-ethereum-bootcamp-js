@@ -55,7 +55,7 @@ describe( `public key cryptography`, () => {
 
     describe( `recover the public key`, () => {
 
-        test( `can recover the public key`, async () => {
+        it( `can recover the public key`, async () => {
             const bytes = utf8ToBytes( msg )
             const hash = keccak256( bytes )
             const sig = await secp256k1.sign( hash, PRIVATE_KEY )
