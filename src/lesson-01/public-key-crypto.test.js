@@ -1,8 +1,7 @@
-import { assert, beforeAll, describe, it } from "vitest";
+import { assert, describe, it } from "vitest";
 import { toHex, utf8ToBytes } from "ethereum-cryptography/utils";
 import { keccak256 } from "ethereum-cryptography/keccak";
 import { secp256k1 } from "ethereum-cryptography/secp256k1";
-import { anvil } from "../config/anvil.js";
 
 const debug = false
 

@@ -2,25 +2,18 @@ import { assert, describe, test } from "vitest";
 import { secp256k1 } from "ethereum-cryptography/secp256k1";
 import { toHex } from "ethereum-cryptography/utils";
 import { keccak256 } from "ethereum-cryptography/keccak";
-import { anvil } from "../config/anvil.js";
+import { anvilAccounts } from "../config/anvilAccounts.js";
 import { privatekeyToAddress } from "./lib/privatekey-to-address.js";
 
 const debug = false
 const PRIVATE_KEY = "6b911fd37cdf5c81d4c0adb1ab7fa822ed253ab0ad9aa18d77257c88b29b718e";
 const EXPECTED_ADDRESS = "16bB6031CBF3a12B899aB99D96B64b7bbD719705";
 
-// test data
-const cases = anvil.privateKeys.map( ( key, i ) => ({
-    privateKey: key,
-    account: anvil.accounts[i]
-}) )
-debug && console.log( { cases } )
-
 describe( `anvil public key -> ethereum address`, () => {
 
     describe( `manual calculation`, () => {
 
-        test.each( [ ...cases ] )( `$privateKey -> $account`, ( { privateKey, account } ) => {
+        test.each( anvilAccounts )( `$privateKey -> $account`, ( { privateKey, account } ) => {
 
             debug && console.log( '-'.repeat( 50 ) )
             debug && console.log( { privateKey, account } )
@@ -72,7 +65,7 @@ describe( `anvil public key -> ethereum address`, () => {
 
     describe( `privateKeyToHexAddress()`, () => {
 
-        test.each( [ ...cases ] )(
+        test.each( anvilAccounts )(
             `$privateKey -> $account`,
             ( { privateKey, account } ) => {
                 const address = privatekeyToAddress( privateKey )
