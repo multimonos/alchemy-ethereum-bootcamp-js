@@ -1,7 +1,7 @@
 import { assert, beforeAll, describe, it } from "vitest";
-import { alchemyApikey } from "../helper/alchemy.js";
+import { ALCHEMY_APIKEY } from "../helper/env.js";
 
-const url = `https://eth-mainnet.g.alchemy.com/v2/${alchemyApikey()}`;
+const url = `https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_APIKEY}`;
 
 async function getBlockNumber( debug = false ) {
     const res = await fetch( url, {
@@ -68,7 +68,7 @@ describe( `ethereum json rpc calls`, () => {
 
     describe( `alchemy api key`, () => {
         it( `is not empty`, () => {
-            assert.isNotEmpty( alchemyApikey() )
+            assert.isNotEmpty( ALCHEMY_APIKEY )
         } )
 
     } )

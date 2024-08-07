@@ -1,7 +1,7 @@
 import { assert, describe, it } from "vitest";
-import { alchemyApikey } from "../helper/alchemy.js";
+import { ALCHEMY_APIKEY } from "../helper/env.js";
 
-const url = `https://eth-mainnet.g.alchemy.com/v2/${alchemyApikey()}`;
+const url = `https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_APIKEY}`;
 
 describe( `batch json rpc`, () => {
 

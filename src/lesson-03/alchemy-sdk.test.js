@@ -1,30 +1,17 @@
 import { assert, beforeAll, describe, it } from "vitest";
 import { Alchemy, Network, Utils, Wallet } from "alchemy-sdk";
-import 'dotenv/config'
+import { ALCHEMY_APIKEY, DEV0_ADDRESS, DEV0_PKEY, DEV1_ADDRESS } from "../helper/env.js";
 
 const dbg = true
 
 describe( `alchemy sdk tests ( sepolia )`, () => {
-
-    describe( `env vars are set`, () => {
-        it.each( [
-            [ 'ALCHEMY_ETHBOOTCAMP_APIKEY' ],
-            [ 'METAMASK_DEV0_PKEY' ],
-            [ 'METAMASK_DEV0_ADDRESS' ],
-            [ 'METAMASK_DEV1_ADDRESS' ],
-
-        ] )( `process.env.%s`, ( varname ) => {
-            assert.property( process.env, varname )
-            assert.isNotEmpty( process.env[varname] )
-        } )
-    } )
 
     describe( `sdk`, () => {
 
         let alchemy
 
         const settings = {
-            apiKey: process.env.ALCHEMY_ETHBOOTCAMP_APIKEY,
+            apiKey: ALCHEMY_APIKEY,
             network: Network.ETH_SEPOLIA
         }
 
@@ -46,7 +33,7 @@ describe( `alchemy sdk tests ( sepolia )`, () => {
         let wallet
 
         beforeAll( () => {
-            wallet = new Wallet( process.env.METAMASK_DEV0_PKEY )
+            wallet = new Wallet( DEV0_PKEY )
             dbg && console.log( { wallet } )
         } )
 
@@ -54,7 +41,7 @@ describe( `alchemy sdk tests ( sepolia )`, () => {
             assert.instanceOf( wallet, Wallet )
             assert.property( wallet, 'address' )
             assert.isNotEmpty( wallet.address )
-            assert.equal( wallet.address, process.env.METAMASK_DEV0_ADDRESS )
+            assert.equal( wallet.address, DEV0_ADDRESS )
         } )
 
     } )
@@ -70,17 +57,17 @@ describe( `alchemy sdk tests ( sepolia )`, () => {
         let originalBalance
         let finalBalance
         const settings = {
-            apiKey: process.env.ALCHEMY_ETHBOOTCAMP_APIKEY,
+            apiKey: ALCHEMY_APIKEY,
             network: Network.ETH_SEPOLIA
         }
 
         beforeAll( async () => {
             alchemy = new Alchemy( settings )
-            wallet = new Wallet( process.env.METAMASK_DEV0_PKEY )
-            originalBalance= await alchemy.core.getBalance(process.env.METAMASK_DEV0_ADDRESS)
+            wallet = new Wallet( DEV0_PKEY )
+            originalBalance = await alchemy.core.getBalance( DEV0_ADDRESS )
             nonce = await alchemy.core.getTransactionCount( wallet.address, 'latest' )
             txn = {
-                to: process.env.METAMASK_DEV0_ADDRESS,
+                to: DEV1_ADDRESS,
                 value: Utils.parseUnits( '5', 'gwei' ),
                 gasLimit: '23000',
                 maxPriorityFeePerGas: Utils.parseUnits( '5', 'gwei' ),
@@ -93,7 +80,7 @@ describe( `alchemy sdk tests ( sepolia )`, () => {
             dbg && console.log( { signedTxn } )
             response = await alchemy.core.sendTransaction( signedTxn )
             console.log( { response } )
-            finalBalance = await alchemy.core.getBalance(process.env.METAMASK_DEV0_ADDRESS)
+            finalBalance = await alchemy.core.getBalance( DEV0_ADDRESS )
         } )
 
         it( `new Alchemy`, async () => {
@@ -152,8 +139,8 @@ describe( `alchemy sdk tests ( sepolia )`, () => {
         } )
 
         it( `final balance != original balance`, async () => {
-            assert.notEqual(originalBalance._hex,finalBalance._hex)
-            dbg&&console.log(finalBalance,originalBalance  )
+            assert.notEqual( originalBalance._hex, finalBalance._hex )
+            dbg && console.log( finalBalance, originalBalance )
         } )
     } )
 } )
