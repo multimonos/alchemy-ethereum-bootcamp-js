@@ -10,9 +10,14 @@
     "test": "vitest"
   },
   "devDependencies": {
+    "alchemy-sdk": "^3.3.1",
     "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.5",
     "ethereum-cryptography": "^2.2.1",
     "vite": "^5.3.4",
     "vitest": "^2.0.4"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
   }
 }
