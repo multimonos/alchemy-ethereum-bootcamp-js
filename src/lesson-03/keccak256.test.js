@@ -2,6 +2,7 @@ import { assert, describe, it } from "vitest";
 import { keccak256 } from "ethereum-cryptography/keccak";
 import { toHex, utf8ToBytes } from "ethereum-cryptography/utils";
 
+const dbg = false
 const strings = [
     'withdrawEther()',
     'helloWorlds(uint256)',
@@ -72,7 +73,7 @@ describe( `keccak256`, () => {
         assert.lengthOf( withPrefix, 66 )
         assert.isString( withPrefix )
 
-        console.log('calldata:', { bytes, hash, first4Bytes,  padded, hexString, withPrefix } )
+        dbg && console.log( 'calldata:', { bytes, hash, first4Bytes, padded, hexString, withPrefix } )
     } )
 
 
