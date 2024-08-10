@@ -1,6 +1,6 @@
 import { assert, beforeAll, describe, it } from "vitest";
 import { Alchemy, Network, Utils, Wallet } from "alchemy-sdk";
-import { ALCHEMY_APIKEY, DEV0_ADDRESS, DEV0_PKEY, DEV1_ADDRESS } from "../helper/env.js";
+import { ALCHEMY_APIKEY, DEV0_ADDRESS, DEV0_PKEY, DEV1_ADDRESS } from "../config/env.js";
 
 const dbg = false
 

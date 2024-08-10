@@ -1,5 +1,5 @@
 import { assert, beforeAll, describe, it } from "vitest";
-import { ALCHEMY_APIKEY } from "../helper/env.js";
+import { ALCHEMY_APIKEY } from "../config/env.js";
 
 const url = `https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_APIKEY}`;
 

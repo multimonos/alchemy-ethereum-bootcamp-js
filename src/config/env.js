@@ -14,3 +14,7 @@ export const GANACHE0_PKEY = process.env.GANACHE0_PKEY
 export const GANACHE0_ADDRESS = process.env.GANACHE0_ADDRESS
 export const GANACHE1_PKEY = process.env.GANACHE0_PKEY
 export const GANACHE1_ADDRESS = process.env.DEV1_ADDRESS
+
+
+export const ANVIL_URL=process.env.ANVIL_URL
+export const ANVIL0_PKEY=process.env.ANVIL0_PKEY

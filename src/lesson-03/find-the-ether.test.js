@@ -1,6 +1,6 @@
 import { assert, beforeAll, describe, it } from "vitest";
 import { ethers, Wallet, ZeroHash } from "ethers";
-import { GANACHE_URL } from "../helper/env.js";
+import { GANACHE_URL } from "../config/env.js";
 import { Network } from "alchemy-sdk";
 
 

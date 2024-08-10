@@ -1,5 +1,5 @@
 import { assert, describe, it } from "vitest";
-import { GANACHE_URL } from "../helper/env.js";
+import { GANACHE_URL } from "../config/env.js";
 import { ethers, parseEther, TransactionReceipt, TransactionResponse, Wallet } from "ethers";
 
 const dbg = true
