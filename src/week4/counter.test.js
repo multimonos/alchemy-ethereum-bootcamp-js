@@ -105,7 +105,7 @@ describe( `counter test`, () => {
     } )
 
 
-    describe.only( `connect to many signers / wallets`, () => {
+    describe( `connect to many signers / wallets`, () => {
         let wallets
         beforeAll( () => {
             wallets = anvilAccounts.map( acct => {
