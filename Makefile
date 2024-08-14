@@ -19,6 +19,8 @@ week4-sol:
 	@forge test --watch --mc CounterTest
 week5:
 	@forge test --mc "Game*" --watch -vv
+week5b-up:
+	@anvil
 week5b-deploy:
 	@forge clean
 	@forge script ./src/week5b/DeployEventGames.s.sol -vv --broadcast --rpc-url=$(ANVIL_URL) --private-key=$(ANVIL0_PKEY)
@@ -36,7 +38,7 @@ week5-escrow-deploy:
 	@tree ./src/week5-escrow
 	@vitest watch src/week5-escrow/*
 week6:
-	@vitest watch src/week6/*
+	@forge test --mc "(Party|Escrow)Test" --watch -vv
 week7:
 	@vitest watch src/week7/*
 week8:
