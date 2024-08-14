@@ -28,6 +28,13 @@ week5b-deploy:
 week5b:
 	# no parallel required or ethers' nonces freak out.
 	@vitest watch src/week5b/* --no-file-parallelism
+week5-escrow:
+	@forge test --mc "Escrow*" --watch -vv
+week5-escrow-deploy:
+	@forge build ./src/week5-escrow/Escrow.sol
+	@cp ./out/Escrow.sol/Escrow.json ./src/week5-escrow/Escrow.json
+	@tree ./src/week5-escrow
+	@vitest watch src/week5-escrow/*
 week6:
 	@vitest watch src/week6/*
 week7:
