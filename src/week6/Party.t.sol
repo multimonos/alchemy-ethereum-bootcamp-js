@@ -125,8 +125,8 @@ contract PartyTest is Test {
         party.payBill(venue, cost);
 
         // measure
-        console.logUint(delta);
-        console.logUint(users.length);
+//        console.logUint(delta);
+//        console.logUint(users.length);
         assertTrue(input > 0);
         assertTrue(delta > 0);
         assertEq(venue.balance, cost);
