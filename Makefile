@@ -38,7 +38,7 @@ week5-escrow-deploy:
 	@tree ./src/week5-escrow
 	@vitest watch src/week5-escrow/*
 week6:
-	@forge test --mc "(Party|DeadMansSwitch|Multisig)Test" --watch -vvv
+	@forge test --mc "(Party|DeadMansSwitch|Multisig|Collectible|Token)Test" --watch -vvv
 week7:
 	@vitest watch src/week7/*
 week8:
