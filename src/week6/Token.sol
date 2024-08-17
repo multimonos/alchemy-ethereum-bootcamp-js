@@ -2,7 +2,8 @@
 pragma solidity 0.8.20;
 
 contract TokenEvents {
-    event Transfer(address sender, address recipient, uint value);
+    event Transfer(address from, address to, uint value);
+    event Approval(address from, address to, uint value);
 }
 
 
@@ -19,7 +20,7 @@ contract Token is TokenEvents {
     string public symbol = "FOK";
 
     mapping(address => uint) private _balances;
-
+    mapping(address => mapping(address => uint)) private _allowed;
 
     // --- modifiers ---
 
@@ -38,6 +39,20 @@ contract Token is TokenEvents {
         _balances[msg.sender] -= amount;
         _balances[recipient] += amount;
 
-        emit Transfer(msg.sender,recipient,amount);
+        emit Transfer(msg.sender, recipient, amount);
+    }
+
+    function approve(address spender, uint value) public returns (bool){
+        _allowed[msg.sender][spender] = value;
+        emit Approval(msg.sender, spender, value);
+        return true;
+    }
+
+    function transferFrom(address from, address to, uint value) public returns (bool)  {
+        _balances[to] += value;
+        _balances[from] -= value;
+        _allowed[from][msg.sender] -= value;
+        emit Transfer(from, to, value);
+        return true;
     }
 }
