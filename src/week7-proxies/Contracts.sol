@@ -52,7 +52,7 @@ contract A { // version A of logic
         _x = val;
     }
 
-    function getX() external returns (uint)  {
+    function getX() external view returns (uint)  {
         return _x;
     }
 }
