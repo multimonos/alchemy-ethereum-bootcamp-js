@@ -62,8 +62,8 @@ w7-libs:
 
 # week 7 / upgradeable contracts
 w7-upgradeble-setup:
+	rm -f ./remappings.txt
 	@forge clean
-	@forge install foundry-rs/forge-std
-	@forge install OpenZeppelin/openzeppelin-foundry-upgrades
-	@forge install OpenZeppelin/openzeppelin-contracts-upgradeable
+	@forge install --no-commit OpenZeppelin/openzeppelin-foundry-upgrades
+	@forge install --no-commit OpenZeppelin/openzeppelin-contracts-upgradeable
 	@forge remappings > remappings.txt
