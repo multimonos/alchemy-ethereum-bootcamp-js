@@ -41,7 +41,29 @@ week6:
 	@forge test --mc "(Party|DeadMansSwitch|Multisig|Collectible|Token|Bucket)Test" --watch -vvv
 week6-js:
 	@vitest watch src/week6/*
-week7:
+week7-up:
+	@anvil
+week7-deploy:
+	@forge clean
+	@forge script ./src/week7/DeployStorage.s.sol --json --broadcast --rpc-url=$(ANVIL_URL) --private-key=$(ANVIL0_PKEY)
+	@cp ./out/Storage.sol/Storage.json ./src/week7/storage_abi.json
+	[ -f "src/week7/contract_address.js" ] && "found contract_address.js" || echo 'export const contractAddress = "";' > src/week7/contract_address.js
+	echo "Copy contract address to week04/contract-address.js"
+week7-js:
 	@vitest watch src/week7/*
-week8:
-	@vitest watch src/week8/*
+week7-sol:
+	@forge test --mc "(Storage)Test" --watch -vvv
+
+# week 7 / delegation
+w7-proxy:
+	@forge test --mc "(Proxy)Test" --watch -vvvvv
+w7-libs:
+	@forge test --mc "(Libraries)Test" --watch -vvv
+
+# week 7 / upgradeable contracts
+w7-upgradeble-setup:
+	@forge clean
+	@forge install foundry-rs/forge-std
+	@forge install OpenZeppelin/openzeppelin-foundry-upgrades
+	@forge install OpenZeppelin/openzeppelin-contracts-upgradeable
+	@forge remappings > remappings.txt
