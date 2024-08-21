@@ -23,6 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
+# forge
 broadcast/
 out/
 cache/
+lib/
