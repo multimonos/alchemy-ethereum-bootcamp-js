@@ -61,9 +61,34 @@ w7-libs:
 	@forge test --mc "(Libraries)Test" --watch -vvv
 
 # week 7 / upgradeable contracts
-w7-upgradeble-setup:
+upgradeable-setup:
+	clear
+	@npm install -D @openzeppelin/upgrades-core
 	rm -f ./remappings.txt
 	@forge clean
 	@forge install --no-commit OpenZeppelin/openzeppelin-foundry-upgrades
 	@forge install --no-commit OpenZeppelin/openzeppelin-contracts-upgradeable
 	@forge remappings > remappings.txt
+upgradeable-build:
+	@forge clean
+	@forge build src/week7-upgradeable
+upgradeable-check-json:
+	@cat out/VendingMachineV1.sol/*.json |json_pp |grep "storageLayout" -A4
+	@cat out/VendingMachineV2.sol/*.json |json_pp |grep "storageLayout" -A4
+upgradeable-validate:
+	clear
+	@forge clean
+	@forge build src/week7-upgradeable
+	@npx @openzeppelin/upgrades-core validate ./out/build-info --contract=VendingMachineV1
+	@npx @openzeppelin/upgrades-core validate ./out/build-info --contract=VendingMachineV2
+upgradeable-test:
+	clear
+	@forge clean
+	@forge test --mc "VendingMachine(V1|V2)Test" --watch -vvv
+upgradeable-deploy:
+	@forge clean
+	@forrge build
+#	@npx @openzeppelin/upgrades-core validate
+	@forge script ./src/week7-upgradeable/Deploy.s.sol --broadcast --rpc-url=$(ANVIL_URL) --private-key=$(ANVIL0_PKEY)
+	# use --sender <address> when performing upgrades
+	# use --verify to verify contract with etherscan
