@@ -61,7 +61,7 @@ w7-libs:
 	@forge test --mc "(Libraries)Test" --watch -vvv
 
 # week 7 / upgradeable contracts
-upgradeable-setup:
+upgradeable-install:
 	clear
 	@npm install -D @openzeppelin/upgrades-core
 	rm -f ./remappings.txt
@@ -84,11 +84,34 @@ upgradeable-validate:
 upgradeable-test:
 	clear
 	@forge clean
-	@forge test --mc "VendingMachine(V1|V2)Test" --watch -vvv
+	@forge test --mc "VendingMachineTest" -vvv
 upgradeable-deploy:
-	@forge clean
-	@forrge build
-#	@npx @openzeppelin/upgrades-core validate
-	@forge script ./src/week7-upgradeable/Deploy.s.sol --broadcast --rpc-url=$(ANVIL_URL) --private-key=$(ANVIL0_PKEY)
-	# use --sender <address> when performing upgrades
-	# use --verify to verify contract with etherscan
+	@forge script ./src/week7-upgradeable/DeployVendingMachine.s.sol --force --broadcast --rpc-url=$(ANVIL_URL)
+	@echo '--- second contract address is proxy, first is the VendingMachineV1 contract ---'
+upgradeable-upgrade:
+	@forge script ./src/week7-upgradeable/UpgradeVendingMachine.s.sol --force --broadcast --rpc-url=$(ANVIL_URL) --sender=$(ANVIL1_ADDRESS)
+	@echo '--- this is the VendingMachineV2 contract ---'
+# convenience methods ... just export proxy=...
+# no need to "reset" the proxy after the upgrade as it's the same address
+upgradeable-call-proxy:
+	@echo "\n--- Version 1 ---"
+	cast call $(proxy) 'owner()(address)'
+	cast call $(proxy) 'version()(uint8)'
+	cast call $(proxy) 'baz()(string memory)'
+	@echo "\n--- Version 2 only ---"
+	cast call $(proxy) 'foobar()(string memory)'
+
+# SEPOLIA
+upgradeable-sepolia-deploy:
+	@forge script ./src/week7-upgradeable/DeployVendingMachine.s.sol --force --broadcast --rpc-url=$(SEPOLIA_URL) --etherscan-api-key=$(ETHERSCAN_APIKEY) --verify
+	@echo '--- second contract address is proxy, first is the VendingMachineV1 contract ---'
+upgradeable-sepolia-upgrade:
+	@forge script ./src/week7-upgradeable/UpgradeVendingMachine.s.sol --force --broadcast --rpc-url=$(SEPOLIA_URL) --sender=$(DEV1_ADDRESS) --etherscan-api-key=$(ETHERSCAN_APIKEY) --verify
+	@echo '--- this is the VendingMachineV2 contract ---'
+upgradeable-sepolia-call-proxy:
+	@echo "\n--- Version 1 ---"
+	cast call $(proxy) 'owner()(address)' --rpc-url=$(SEPOLIA_URL)
+	cast call $(proxy) 'version()(uint8)' --rpc-url=$(SEPOLIA_URL)
+	cast call $(proxy) 'baz()(string memory)' --rpc-url=$(SEPOLIA_URL)
+	@echo "\n--- Version 2 only ---"
+	cast call $(proxy) 'foobar()(string memory)' --rpc-url=$(SEPOLIA_URL)

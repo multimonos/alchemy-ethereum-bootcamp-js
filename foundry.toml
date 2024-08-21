@@ -2,7 +2,6 @@
 src = "src"
 out = "out"
 libs = ["node_modules", "lib"]
-fs_permissions = [{ access = "read-write", path = "./src"}]
 
 # ---
 # openzepplin-upgradeable
@@ -11,6 +10,10 @@ ffi = true
 ast = true
 build_info = true
 extra_output = ["storageLayout"]
+fs_permissions = [
+    { access = "read-write", path = "./src"},
+    { access = "read", path = "./out"}
+]
 # END:openzepplin-upgradeable
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
