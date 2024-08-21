@@ -8,7 +8,7 @@ contract DeployStorage is Script {
 
     function run() external {
         vm.startBroadcast();
-        Storage con = new Storage();
+        new Storage();
         vm.stopBroadcast();
     }
 
